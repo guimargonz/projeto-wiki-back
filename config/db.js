@@ -7,15 +7,19 @@ const pool = new Pool({
     database: process.env.DB_DATABASE,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    // 👇 ESTA É A LINHA OBRIGATÓRIA PARA BANCOS NA NUVEM (Neon.tech) 👇
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 // Testa a conexão
 pool.query('SELECT NOW()')
     .then(res => {
-        console.log('Conectado ao banco de dados PostgreSQL em:', res.rows[0].now);
+        console.log('✅ Conectado ao banco de dados PostgreSQL na nuvem em:', res.rows[0].now);
     })
     .catch(err => {
-        console.error('Erro ao conectar ao banco de dados:', err.stack);
+        console.error('❌ Erro ao conectar ao banco de dados:', err.stack);
     });
 
 module.exports = {
