@@ -9,7 +9,9 @@ const app = express();
 const PORT = process.env.PORT || 5000; // Usa a porta do .env ou 5000 como padrão
 
 // --- Middlewares ---
-app.use(cors()); // Habilita CORS para todas as origens (ajuste em produção se necessário)
+app.use(cors({
+    origin: 'https://projeto-wiki-front.vercel.app/' // Substitua pelo link real da Vercel depois
+}));
 app.use(express.json()); // Habilita o parsing de JSON no corpo das requisições
 
 // --- Servir Arquivos Estáticos (Imagens Uploaded) --- 
